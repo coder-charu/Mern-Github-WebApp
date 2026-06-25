@@ -61,7 +61,7 @@ const Repo = ({ repo }) => {
       </time>
       <p className="mb-4 text-base font-normal text-gray-500">
         {repo.description ?
-          repo.description.slice(0, 500)
+          repo.description.slice(0, 50)
         : "No description provided"}
       </p>
       {PROGRAMMING_LANGUAGES[repo.language] ?
