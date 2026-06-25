@@ -1,4 +1,3 @@
-import React from "react";
 import { Link } from "react-router-dom";
 import { IoHomeSharp } from "react-icons/io5";
 import { FaHeart } from "react-icons/fa";
@@ -6,17 +5,21 @@ import { MdOutlineExplore } from "react-icons/md";
 import { PiSignInBold } from "react-icons/pi";
 import { MdEditDocument } from "react-icons/md";
 import Logout from "./Logout";
+import { useAuthContext } from "../context/AuthContext";
 
 const Sidebar = () => {
-  const authUser = true;
+  const { authUser } = useAuthContext();
+
   return (
-    <aside className="flex flex-col items-center w-12 sm:w-14 md:w-16 shrink-0  sticky top-0 left-0 h-screen py-8 overflow-y-auto border-r bg-glass">
+    <aside
+      className="flex flex-col items-center min-w-12 sm:w-16 sticky top-0 left-0 h-screen py-8
+      overflow-y-auto border-r bg-glass"
+    >
       <nav className="h-full flex flex-col gap-3">
-        {/* app logo */}
         <Link to="/" className="flex justify-center">
           <img className="h-8" src="/github.svg" alt="Github Logo" />
         </Link>
-        {/* home button */}
+
         <Link
           to="/"
           className="p-1.5 flex justify-center transition-colors duration-200 rounded-lg 
@@ -24,7 +27,7 @@ const Sidebar = () => {
         >
           <IoHomeSharp size={20} />
         </Link>
-        {/* likes logo */}
+
         {authUser && (
           <Link
             to="/likes"
@@ -33,7 +36,7 @@ const Sidebar = () => {
             <FaHeart size={22} />
           </Link>
         )}
-        {/* explore logo */}
+
         {authUser && (
           <Link
             to="/explore"
@@ -42,7 +45,7 @@ const Sidebar = () => {
             <MdOutlineExplore size={25} />
           </Link>
         )}
-        {/* login logo */}
+
         {!authUser && (
           <Link
             to="/login"
@@ -51,7 +54,7 @@ const Sidebar = () => {
             <PiSignInBold size={25} />
           </Link>
         )}
-        {/* signup logo */}
+
         {!authUser && (
           <Link
             to="/signup"
@@ -60,7 +63,7 @@ const Sidebar = () => {
             <MdEditDocument size={25} />
           </Link>
         )}
-        {/* logout logo */}
+
         {authUser && (
           <div className="flex flex-col gap-2 mt-auto">
             <Logout />
@@ -70,5 +73,4 @@ const Sidebar = () => {
     </aside>
   );
 };
-
 export default Sidebar;
