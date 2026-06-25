@@ -1,7 +1,8 @@
 import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
-import userRoute from "./routes/user.route.js";
+import userRoutes from "./routes/user.route.js";
+import exploreRoutes from "./routes/explore.route.js";
 
 dotenv.config();
 
@@ -13,7 +14,8 @@ app.get("/", (req, res) => {
   res.send("Server is ready!!");
 });
 // fixed routes endpoint via middleware "use"
-app.use("/api/users", userRoute);
+app.use("/api/users", userRoutes);
+app.use("/api/explore", exploreRoutes);
 
 app.listen(4000, () => {
   console.log("Server started on http://localhost:4000");
