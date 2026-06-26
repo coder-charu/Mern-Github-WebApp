@@ -13,11 +13,25 @@ const ExplorePage = () => {
     setRepos([]);
     try {
       const response = await fetch(
-        `http://localhost:4000/api/explore/repos/${language}`,
+        "http://localhost:4000/api/explore/repos/" + language,
+        {
+          credentials: "include",
+        },
       );
 
-      const { repos } = await response.json();
-      setRepos(repos);
+      if (response.status === 401) {
+        toast.error("Please login first");
+        window.location.href = "/login";
+        return;
+      }
+
+      if (!response.ok) {
+        throw new Error("Failed to fetch repositories");
+      }
+
+      const data = await response.json();
+
+      setRepos(data.repos);
       setSelectedLanguage(language);
     } catch (error) {
       toast.error(error.message);

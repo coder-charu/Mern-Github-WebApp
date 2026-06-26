@@ -2,5 +2,9 @@ export async function ensureAuthenticated(req, res, next) {
   if (req.isAuthenticated()) {
     return next();
   }
-  res.redirect(process.env.CLIENT_BASE_URL + "/login");
+
+  return res.status(401).json({
+    success: false,
+    message: "Unauthorized",
+  });
 }
